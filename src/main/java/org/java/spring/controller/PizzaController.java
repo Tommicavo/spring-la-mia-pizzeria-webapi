@@ -20,7 +20,7 @@ import org.java.spring.db.pojo.Pizza;
 import java.util.stream.Collectors;
 
 @Controller
-public class MainController {
+public class PizzaController {
 
 	@Autowired
 	private PizzaService pizzaService;

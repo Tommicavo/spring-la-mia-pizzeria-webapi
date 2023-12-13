@@ -13,6 +13,9 @@ import jakarta.persistence.GenerationType;
 import java.util.List;
 import java.util.Arrays;
 import org.hibernate.validator.constraints.Length;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 
 @Entity
@@ -116,15 +119,17 @@ public class Pizza {
 		this.offers = offers;
 	}
 
+	@JsonProperty("ingredients")
 	public List<Ingredient> getIngredients() {
 		return ingredients;
 	}
 
+	@JsonIgnore
 	public void setIngredients(List<Ingredient> ingredients) {
 		this.ingredients = ingredients;
 	}
 
-	public void setIngredients(Ingredient... ingredients) {
+	private void setIngredients(Ingredient... ingredients) {
 		setIngredients(Arrays.asList(ingredients));
 	}
 

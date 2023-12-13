@@ -3,6 +3,8 @@ package org.java.spring.db.pojo;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -23,6 +25,7 @@ public class Ingredient {
     private boolean checked;
 
     @ManyToMany(mappedBy = "ingredients", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Pizza> pizzas;
 
     public Ingredient() {
