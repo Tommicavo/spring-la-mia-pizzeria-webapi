@@ -25,7 +25,16 @@
 					</div>
 					<div class="offers" th:if="${pizza.offers.size() > 0}">
 						<div class="fw-bold">Offers: </div>
-						<div th:each="offer : ${pizza.offers}">[[${offer}]]</div>
+						<div class="card" th:each="offer : ${pizza.offers}">
+							<div class="card-body">
+								<span>[[${offer}]]</span>
+								<span>
+									<form th:action="@{'/offers/' + ${offer.id} + '/delete'}" method="POST" th:object="${offer}">
+										<button type="submit" class="btn btn-danger">-</button>
+									</form>
+								</span>
+							</div>
+						</div>
 					</div>
 					<div th:if="${pizza.ingredients.size() > 0}" class="ingredients">
 						<div class="fw-bold">Ingredients:</div>

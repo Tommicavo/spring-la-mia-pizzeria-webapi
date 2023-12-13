@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import jakarta.validation.Valid;
 
 @Controller
@@ -51,5 +50,19 @@ public class OfferController {
         offerService.save(newOffer);
 
         return "redirect:/pizzas/" + id;
+    }
+
+    @PostMapping("/offers/{id}/delete")
+    public String deleteOffer(@PathVariable int id) {
+        Offer offer = offerService.findById(id);
+
+        Pizza pizza = offer.getPizza();
+        if (pizza != null) {
+            pizza.getOffers().remove(offer);
+            pizzaService.save(pizza);
+        }
+
+        offerService.delete(offer);
+        return "redirect:/pizzas/" + pizza.getId();
     }
 }
