@@ -42,6 +42,16 @@
         // console.log(filteredPizzas);
         this.filteredPizzas = filteredPizzas;
       },
+      async deletePizza(pizza_id) {
+        const endpoint = `http://127.0.0.1:8080/pizzas/api/v1.0/${pizza_id}`;
+        try {
+          const res = await axios.delete(endpoint);
+          console.log(res.data);
+          this.$router.go();
+        } catch (err) {
+          console.error(err);
+        }
+      },
     },
     mounted() {
       this.fetchPizzas();
@@ -51,7 +61,7 @@
 
 <template>
   <AppHeader @searchBtnPressed="fetchPizzasByName" />
-  <AppMain :pizzas="filteredPizzas" />
+  <AppMain :pizzas="filteredPizzas" @delete="deletePizza" />
 </template>
 
 <style lang="scss" scoped>

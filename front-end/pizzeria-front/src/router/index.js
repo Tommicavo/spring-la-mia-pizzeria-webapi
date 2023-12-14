@@ -12,7 +12,7 @@ const router = createRouter({
     routes: [
         {path: '/', name: 'HomePage', component: HomePage},
         {path: '/pizzaForm', name: 'FormPage', component: FormPage},
-        {path: '/pizzas/{id}', name: 'DetailPage', component: DetailPage},
+        {path: '/pizzas/:id', name: 'DetailPage', component: DetailPage},
 
         {path: '/notFoundPage', name: 'NotFoundPage', component: NotFoundPage},
         {path: '/:pathMatch(.*)*', redirect: '/NotFoundPage'},

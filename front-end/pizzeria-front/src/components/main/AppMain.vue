@@ -10,6 +10,7 @@
     },
     computed: {},
     methods: {},
+    emits: ["delete"],
   };
 </script>
 
@@ -28,10 +29,18 @@
         <td>{{ pizza.price }}</td>
         <td>
           <div class="d-flex justify-content-center align-items-center gap-3">
-            <router-link class="btn btn-primary" :to="{ name: 'DetailPage' }"
+            <router-link
+              class="btn btn-primary"
+              :to="{ name: 'DetailPage', params: { id: pizza.id } }"
               >Show</router-link
             >
-            <button type="button" class="btn btn-danger">Delete</button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              @click="$emit('delete', pizza.id)"
+            >
+              Delete
+            </button>
           </div>
         </td>
       </tr>
