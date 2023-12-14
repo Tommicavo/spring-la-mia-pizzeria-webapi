@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.java.spring.db.serv.IngredientService;
+import org.java.spring.db.serv.OfferService;
 import org.java.spring.db.serv.PizzaService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +25,9 @@ public class PizzaController {
 
 	@Autowired
 	private PizzaService pizzaService;
+
+	@Autowired
+	private OfferService offerService;
 
 	@Autowired
 	private IngredientService ingredientService;
@@ -130,6 +134,7 @@ public class PizzaController {
 	public String deletePizza(@PathVariable int id) {
 
 		Pizza pizza = pizzaService.findById(id);
+		pizza.deleteOffersByPizza();
 		pizza.clearIngredients();
 		pizzaService.save(pizza);
 

@@ -15,7 +15,7 @@ import java.util.Arrays;
 import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
-
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 
 @Entity
@@ -41,7 +41,7 @@ public class Pizza {
 
 	private boolean isDeleted;
 
-	@OneToMany(mappedBy = "pizza", fetch = FetchType.EAGER)
+	@OneToMany(mappedBy = "pizza", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	private List<Offer> offers;
 
 	@ManyToMany(fetch = FetchType.EAGER)
@@ -135,6 +135,10 @@ public class Pizza {
 
 	public void clearIngredients() {
 		getIngredients().clear();
+	}
+
+	public void deleteOffersByPizza() {
+		getOffers().clear();
 	}
 
 	// Methods
